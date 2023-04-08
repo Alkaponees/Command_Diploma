@@ -1,0 +1,56 @@
+#!Groovy
+pipeline {
+    agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
+    stages {
+         stage('1.Git repository') {
+            steps {
+git branch: 'dev', url: 'https://github.com/macnaer/SS_EDUP.git'
+            }
+        }
+        stage('2.Delete all Docker containers') {
+            steps {
+sh'''#!/bin/sh 
+/home/jenkins_machine/delete.sh
+'''
+
+            }
+        }
+        stage('3.Build Docker images') {
+            steps {
+sh'''#!/bin/sh
+docker build -t alkaponees/ss_edup:latest .
+''' 
+
+
+
+
+            }
+        }
+         stage('4.Run Docker Container') {
+            steps {
+sh '''
+#!/bin/sh/
+docker run -d --restart=always -p 80:80 alkaponees/ss_edup:latest
+'''
+
+
+            }
+        }
+        stage('5.Login to DockerHub') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('6.Push to DockerHub') {
+      steps {
+        sh 'docker push alkaponees/ss_edup:latest'
+      }
+    }
+  }
+}
