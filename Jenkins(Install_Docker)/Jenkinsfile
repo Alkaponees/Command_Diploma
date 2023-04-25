@@ -1,0 +1,21 @@
+#!Groovy
+pipeline {
+    agent {
+       node {
+            label 'Ansible'
+        }
+    }
+    stages {
+        
+        stage ('1.Install Docker') {
+          steps{
+            sh'''
+            #!/bin/sh
+            ansible-playbook Ansible/install_Docker.yml
+            '''
+          }
+        }
+
+
+  }
+}

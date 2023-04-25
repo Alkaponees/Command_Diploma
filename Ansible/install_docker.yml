@@ -1,0 +1,46 @@
+---
+- name: Install Docker and Docker Compose on EC2 instances
+  hosts: localhost
+  become: yes
+  tasks:
+    - block:
+        - name: Add Docker GPG key
+          apt_key:
+            url: https://download.docker.com/linux/ubuntu/gpg
+            state: present
+        - name: Add Docker repository
+          apt_repository:
+            repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+            state: present
+
+        - name: Install Docker
+          apt:
+            name:
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+            state: present
+
+        - name: Install Docker Compose
+          get_url:
+            url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+            dest: /usr/local/bin/docker-compose
+            mode: 'u+x,g+x'
+        - name: Restart Docker service
+          service:
+            name: docker
+            state: restarted
+            enabled: yes
+
+        - name: Start Docker service
+          service:
+            name: docker
+            state: started
+
+        - name: Add user to Docker group
+          user:
+            name: ubuntu
+            groups: docker
+            append: yes
+      when: ansible_os_family == "Debian"
+

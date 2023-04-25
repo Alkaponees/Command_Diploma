@@ -1,6 +1,10 @@
 #!Groovy
 pipeline {
-    agent any
+    agent {
+       node {
+            label 'Ansible'
+        }
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
@@ -10,13 +14,22 @@ pipeline {
     stages {
          stage('1.Git repository') {
             steps {
-git branch: 'dev', url: 'https://github.com/macnaer/SS_EDUP.git'
+git branch: 'master', url: 'https://github.com/Alkaponees/SS_EDUP.git'
             }
         }
+        stage ('Install Docker') {
+          steps{
+            sh'''
+            #!/bin/sh
+            ansible-playbook Ansible/ansible.yml
+            '''
+          }
+        }
+
         stage('2.Delete all Docker containers') {
             steps {
 sh'''#!/bin/sh 
-/home/jenkins_machine/delete.sh
+/home/ansible_machine/delete.sh
 '''
 
             }
@@ -38,8 +51,6 @@ sh '''
 #!/bin/sh/
 docker run -d --restart=always -p 80:80 alkaponees/ss_edup:latest
 '''
-
-
             }
         }
         stage('5.Login to DockerHub') {
