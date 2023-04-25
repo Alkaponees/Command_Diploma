@@ -1,0 +1,21 @@
+#!Groovy
+pipeline {
+    agent {
+       node {
+            label 'Ansible'
+        }
+    }
+    stages {
+        
+        stage ('1.Create AWS resources') {
+          steps{
+            sh'''
+            #!/bin/sh
+            ansible-playbook Ansible/terraform_apply.yml
+            '''
+          }
+        }
+
+
+  }
+}
