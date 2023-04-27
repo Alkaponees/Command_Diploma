@@ -13,7 +13,10 @@ pipeline {
             }
         stage ('2.Install Docker') {
           steps{
-           ansiblePlaybook credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'Ansible', playbook: 'Ansible/install_docker'
+          sh'''
+            #!/bin/sh
+            ansible-playbook /home/ansible_machine/workspace/Install_utilities/Ansible/install_docker.yml
+            '''
           }
         }
 
