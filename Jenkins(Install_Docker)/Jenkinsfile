@@ -6,12 +6,16 @@ pipeline {
         }
     }
     stages {
-        
-        stage ('1.Install Docker') {
+        stage ('1. Show current path'){   
+          steps{
+              sh 'pwd'
+        }
+            }
+        stage ('2.Install Docker') {
           steps{
             sh'''
             #!/bin/sh
-            ansible-playbook ../Ansible/install_Docker.yml
+            ansible-playbook /home/ansible_machine/workspace/Install utilities/Ansible/install_Docker.yml
             '''
           }
         }
