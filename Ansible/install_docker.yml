@@ -1,9 +1,7 @@
 ---
 - name: Install Docker and Docker Compose on EC2 instances
-  hosts: localhost
+  hosts: AWS_SERVERS
   become: yes
-  become_user: root
-  remote_user: jenkins
   tasks:
     - block:
         - name: Add Docker GPG key
