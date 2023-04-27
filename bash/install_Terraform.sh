@@ -3,6 +3,8 @@
 # Download Terraform
 wget https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip
 
+#Update repositories and install unzip
+sudo apt update && sudo apt install unzip -y
 # Unzip the downloaded file
 unzip terraform_1.0.8_linux_amd64.zip
 
