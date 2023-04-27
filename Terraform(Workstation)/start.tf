@@ -24,7 +24,7 @@ resource "aws_security_group" "TFDefault" {
  }
  resource "aws_instance" "Workstation"{
      ami = "ami-09e1162c87f73958b"
-    instance_type = "t3.micro"
+     instance_type = "t3.micro"
      key_name = "Stockholm_RSA"
      tags = {
        "Name" = "MYSQL_Server"
