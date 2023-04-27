@@ -43,5 +43,5 @@
             name: ubuntu
             groups: docker
             append: yes
-      when: ansible_os_family = "Debian"
+       when: ansible_os_family = "Debian"
 
