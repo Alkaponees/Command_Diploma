@@ -15,7 +15,7 @@ pipeline {
           steps{
             sh'''
             #!/bin/sh
-            ansible-playbook /home/ansible_machine/workspace/Install utilities/Ansible/install_Docker.yml
+            ansible-playbook /home/ansible_machine/workspace/Install_utilities/Ansible/install_Docker.yml
             '''
           }
         }
