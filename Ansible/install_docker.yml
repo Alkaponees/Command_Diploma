@@ -4,7 +4,6 @@
   become: yes
   gather_facts: no
   tasks:
-    - block:
         - name: Add Docker GPG key
           apt_key:
             url: https://download.docker.com/linux/ubuntu/gpg
@@ -43,5 +42,4 @@
             name: ubuntu
             groups: docker
             append: yes
-      when: ansible_os_family == "Debian"
 
