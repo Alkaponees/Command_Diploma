@@ -3,6 +3,7 @@
   hosts: localhost
   become: yes
   become_user: root
+  remote_user: jenkins
   tasks:
     - block:
         - name: Add Docker GPG key
