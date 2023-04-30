@@ -47,10 +47,4 @@
       when: ansible_os_family == "RedHat"
 
     - name: Run docker container
-      docker_container:
-        name: SS_EDUP_APP
-        image: alkaponees/ss_edup:latest
-        restart: always
-        state: started
-        ports:
-          - "80:80"
+      shell: "docker run -d  --restart=always -p 80:80 alkaponees/ss_edup:latest"
