@@ -11,49 +11,18 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
-    stages {
-         stage('1.Git repository') {
-            steps {
-git branch: 'master', url: 'https://github.com/Alkaponees/SS_EDUP.git'
             }
-        }
-        
-        stage('2.Make script.sh executable'){
-          steps{
-sh 'chmod +x script.sh'
-          }
-        }
-        stage('3.Delete all Docker containers') {
-            steps {
-sh'./script.sh'
-
-            }
-        }
-        stage('4.Build Docker images') {
-            steps {
-sh'''#!/bin/sh
-docker build -t alkaponees/ss_edup:latest .
-''' 
-
-
-
-
-            }
-        }
-         stage('5.Run Docker Container') {
-            steps {
-sh '''
-#!/bin/sh/
-docker run -d --restart=always -p 80:80 alkaponees/ss_edup:latest
-'''
-            }
-        }
-        stage('6.Login to DockerHub') {
+            stage('1.Start Ansible playbook') {
+      steps {
+        sh 'ansible-playbook Ansible/SS_EDUP.yml'
+      }
+    }
+        stage('2.Login to DockerHub') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
-    stage('7.Push to DockerHub') {
+    stage('3.Push to DockerHub') {
       steps {
         sh 'docker push alkaponees/ss_edup:latest'
       }
