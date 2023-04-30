@@ -1,0 +1,25 @@
+#!Groovy
+pipeline {
+    agent {
+       node {
+            label 'Ansible'
+        }
+    }
+    stages {
+        stage ('1. Show current path'){   
+          steps{
+              sh 'pwd'
+        }
+            }
+        stage ('2.Install Docker') {
+          steps{
+          sh'''
+            #!/bin/sh
+            ansible-playbook Ansible/terraform_workstation.yml
+            '''
+          }
+        }
+
+
+  }
+}
