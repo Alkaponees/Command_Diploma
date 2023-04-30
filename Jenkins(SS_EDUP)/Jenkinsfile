@@ -12,7 +12,8 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
-    stage ('1.Install Docker') {
+    stages{
+stage ('1.Install Docker') {
           steps{
           sh'ansible-playbook Ansible/install_docker.yml'
           }
@@ -32,5 +33,7 @@ pipeline {
         sh 'docker push alkaponees/ss_edup:latest'
       }
     }
+    }
+    
   }
 
