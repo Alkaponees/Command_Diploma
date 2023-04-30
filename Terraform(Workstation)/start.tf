@@ -1,3 +1,8 @@
+provider "aws" {
+  region     = "eu-north-1"
+  secret_key = var.aws_secret_key
+  access_key = var.aws_access_key
+}
 resource "aws_security_group" "TFDefault" {
    name   = "TFDefault_Security_Group"
    vpc_id = aws_default_vpc.default.id
@@ -22,6 +27,9 @@ resource "aws_security_group" "TFDefault" {
      "Name" = "Workstation_SG"
    }
  }
+
+ resource "aws_default_vpc" "default" {}
+ 
  resource "aws_instance" "Workstation"{
      ami = "ami-09e1162c87f73958b"
      instance_type = "t3.micro"
