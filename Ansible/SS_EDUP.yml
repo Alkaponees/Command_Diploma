@@ -3,6 +3,8 @@
   hosts: AWS_SERVERS
   become: yes
   gather_facts: yes
+  vars_files:
+    - secrets.yml
   tasks:
     - name: Delete Directory
       shell: "rm -rf SS_EDUP"
@@ -48,3 +50,13 @@
 
     - name: Run docker container
       shell: "docker run -d  --restart=always -p 80:80 alkaponees/ss_edup:latest"
+    - name: Log in to Docker Hub
+      docker_login:
+        username: "{{ dockerhub_username }}"
+        password: "{{ dockerhub_password }}"
+    
+    - name: Push Docker image
+      docker_image:
+        name: your_username/your_image_name
+        tag: latest
+        push: yes

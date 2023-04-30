@@ -23,17 +23,7 @@ pipeline {
         sh 'ansible-playbook Ansible/SS_EDUP.yml'
       }
     }
-        stage('3.Login to DockerHub') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
-    }
-    stage('4.Push to DockerHub') {
-      steps {
-        sh 'docker push alkaponees/ss_edup:latest'
-      }
-    }
-    }
+    
     
   }
 
