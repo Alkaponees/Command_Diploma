@@ -57,6 +57,5 @@
     
     - name: Push Docker image
       docker_image:
-        name: your_username/your_image_name
-        tag: latest
+        name: alkaponees/ss_edup:latest
         push: yes
