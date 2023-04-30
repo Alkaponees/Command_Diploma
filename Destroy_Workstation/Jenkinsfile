@@ -11,7 +11,7 @@ pipeline {
               sh 'pwd'
         }
             }
-        stage ('2.Сreate Workstation on AWS') {
+        stage ('2.Destroy Workstation on AWS') {
           steps{
           sh'''
             #!/bin/sh
