@@ -50,7 +50,7 @@
       docker_container:
         name: SS_EDUP_APP
         image: alkaponees/ss_edup:latest
-        restart: yes
+        restart: always
         state: started
         ports:
           - "80:80"
