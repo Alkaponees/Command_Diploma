@@ -13,7 +13,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
     stages{
-stage ('1.Install Docker') {
+            stage ('1.Install Docker') {
           steps{
           sh'ansible-playbook Ansible/install_docker.yml'
           }
