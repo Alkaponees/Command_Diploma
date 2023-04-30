@@ -35,7 +35,7 @@ resource "aws_security_group" "TFDefault" {
      instance_type = "t3.micro"
      key_name = "Stockholm_RSA"
      tags = {
-       "Name" = "MYSQL_Server"
+       "Name" = "Workstation"
      }
     
      vpc_security_group_ids = [aws_security_group.TFDefault.id]
