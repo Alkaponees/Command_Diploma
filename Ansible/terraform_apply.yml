@@ -6,8 +6,8 @@
     - name: Initialize Terraform
       command: terraform init
       args:
-        chdir: ${HOME}/Command_Diploma/Terraform
+        chdir: ${HOME}/Command_Diploma/Terraform_Load_Balancer
     - name: Apply Terraform plan
       command: terraform apply -auto-approve
       args:
-        chdir: ${HOME}/Command_Diploma/Terraform
+        chdir: ${HOME}/Command_Diploma/Terraform/Terraform_Load_Balancer
