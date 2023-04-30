@@ -6,12 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage ('1. Show current path'){   
-          steps{
-              sh 'pwd'
-        }
-            }
-        stage ('2.Сreate Workstation on AWS') {
+        stage ('1.Destroy Workstation on AWS') {
           steps{
           sh'''
             #!/bin/sh
@@ -19,7 +14,5 @@ pipeline {
             '''
           }
         }
-    
-
   }
 }

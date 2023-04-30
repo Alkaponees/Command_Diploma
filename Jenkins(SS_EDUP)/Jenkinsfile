@@ -3,14 +3,7 @@ pipeline {
     agent {
        node {
             label 'Ansible'
-        }
-        
-    }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-    }
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        }  
     }
     stages{
             stage ('1.Install Docker') {
