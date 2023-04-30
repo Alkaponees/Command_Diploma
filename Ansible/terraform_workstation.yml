@@ -1,6 +1,8 @@
 ---
 - name: Run Terraform
   hosts: localhost
+  vars:
+    public_ip_address: "{{ public_ip_address }}"
   gather_facts: false
   tasks:
     - name: Initialize Terraform
@@ -11,3 +13,6 @@
       command: terraform apply -auto-approve
       args:
         chdir: ${HOME}/Command_Diploma/Terraform(Workstation)
+    - name: Display public IP address
+      debug:
+        var: public_ip_address
