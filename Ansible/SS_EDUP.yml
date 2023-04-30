@@ -2,6 +2,7 @@
 - name: Execute Docker container and Pull Docker image on DockerHub 
   hosts: AWS_SERVERS
   become: yes
+  gather_facts: yes
   tasks:
     - name: Delete Directory
       shell: "rm -rf SS_EDUP"

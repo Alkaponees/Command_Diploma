@@ -2,6 +2,7 @@
 - name: Install Docker and Docker Compose on EC2 instances
   hosts: AWS_SERVERS
   become: yes
+  gather_facts: yes
   tasks:
     - block:
         - name: Add Docker GPG key
