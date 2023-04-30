@@ -4,6 +4,7 @@ pipeline {
        node {
             label 'Ansible'
         }
+        
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -11,21 +12,28 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
-            }
-            stage('1.Start Ansible playbook') {
-      steps {
+    stage ('1.Install Docker') {
+          steps{
+          sh'''
+            #!/bin/sh
+            ansible-playbook Ansible/install_docker.yml
+            '''
+          }
+        }
+            stage('2.Start Ansible playbook') {
+    steps {
         sh 'ansible-playbook Ansible/SS_EDUP.yml'
       }
     }
-        stage('2.Login to DockerHub') {
+        stage('3.Login to DockerHub') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
-    stage('3.Push to DockerHub') {
+    stage('4.Push to DockerHub') {
       steps {
         sh 'docker push alkaponees/ss_edup:latest'
       }
     }
   }
-}
+
