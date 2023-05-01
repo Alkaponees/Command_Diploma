@@ -8,7 +8,6 @@
       shell: "rm -rf SS_EDUP"
     - name: Create Directory for project
       shell: "mkdir SS_EDUP"
-
     - name: Enter in directory
       shell: "cd SS_EDUP/"
     - name: Clear all data from directory
@@ -48,4 +47,3 @@
 
     - name: Run docker container
       shell: "docker run -d  --restart=always -p 80:80 alkaponees/ss_edup:latest"
-      
