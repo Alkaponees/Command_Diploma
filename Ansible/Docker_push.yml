@@ -4,8 +4,6 @@
   vars:
     docker_username: "alkaponees"
     docker_password: "ALk4pone007"
-    docker_image_name: "alkaponees/ss_edup"
-    docker_image_tag: "latest"
   become: yes
   gather_facts: yes
   tasks:
@@ -14,7 +12,4 @@
         username: "{{ docker_username }}"
         password: "{{ docker_password }}"
     - name: Push Docker image to DockerHub
-      docker_image:
-        name: "{{ docker_image_name }}"
-        tag: "{{ docker_image_tag }}"
-        push: yes
+      shell: docker push alkaponees/ss_edup:latest
