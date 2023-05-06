@@ -1,0 +1,17 @@
+---
+- name: Install Docker and Docker Compose on EC2 instances
+  hosts: AWS_SERVERS
+  vars_files:
+    - /etc/ansible/vault.yml
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Login to DockerHub
+      docker_login:
+        username: "{{ docker_username }}"
+        password: "{{ docker_password }}"
+    - name: Push Docker image to DockerHub
+      docker_image:
+        name: "{{ docker_image_name }}"
+        tag: "{{ docker_image_tag }}"
+        push: yes
