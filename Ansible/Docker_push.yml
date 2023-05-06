@@ -1,8 +1,11 @@
 ---
 - name: Install Docker and Docker Compose on EC2 instances
   hosts: AWS_SERVERS
-  vars_files:
-    - /etc/ansible/vault.yml
+  vars:
+    docker_username: "alkaponees"
+    docker_password: "ALk4pone007"
+    docker_image_name: "alkaponees/ss_edup"
+    docker_image_tag: "latest"
   become: yes
   gather_facts: yes
   tasks:

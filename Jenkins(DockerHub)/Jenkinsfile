@@ -10,9 +10,7 @@ pipeline{
        
         stage ('1.Push to DockerHub') {
           steps{
-          withCredentials([string(credentialsId: 'Docker_push', variable: 'qwerty-1')]) {
-  sh "ansible-playbook Ansible/Docker_push.yml --ask-vault-pass --extra-vars 'vault_password=${qwerty-1 }'"
-        }   
+           sh "ansible-playbook Ansible/Docker_push.yml "   
   }
 		}
 }
