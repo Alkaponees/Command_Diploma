@@ -10,4 +10,4 @@
     - name: Apply Terraform plan
       command: terraform apply -auto-approve
       args:
-        chdir: ${HOME}/Command_Diploma/Terraform/Terraform_Load_Balancer
+        chdir: ${HOME}/Command_Diploma/Terraform_Load_Balancer

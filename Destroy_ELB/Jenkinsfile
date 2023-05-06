@@ -1,0 +1,21 @@
+#!Groovy
+pipeline {
+    agent {
+       node {
+            label 'Ansible'
+        }
+    }
+    stages {
+       
+        stage ('1.Destroy Workstation on AWS') {
+          steps{
+          sh'''
+            #!/bin/sh
+            ansible-playbook Ansible/terraform_elb_destroy.yml
+            '''
+          }
+        }
+    
+
+  }
+}

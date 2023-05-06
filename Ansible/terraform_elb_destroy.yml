@@ -1,0 +1,10 @@
+---
+- name: Run Terraform
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Destroy Terraform plan
+      command: terraform destroy -auto-approve
+      args:
+        chdir: ${HOME}/Command_Diploma/Terraform_Load_Balancer
+    
